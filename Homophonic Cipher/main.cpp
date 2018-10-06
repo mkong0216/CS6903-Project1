@@ -36,6 +36,26 @@ vector<string> readTestOneFile () {
     return candidates;
 }
 
+// Converting text file in one string of all 70 dictionary words
+string readTestTwoFile () {
+    ifstream file;
+    string dictionary;
+    string word;
+    file.open("test2_candidate_70_english_words.txt");
+    
+    if (!file) {
+        cerr << "Unable to openfile\n";
+        exit(1);
+    }
+    
+    while (file >> word) {
+        dictionary += word + " ";
+    }
+
+    file.close();
+    return dictionary;
+}
+
 // Finding the letter frequency for the given plaintext
 vector<int> getLetterFrequency (const string& text, int num_symbols) {
     vector<int> freqTable(num_symbols);
@@ -87,13 +107,21 @@ vector<int> parseCiphertext(string str){
 int main(int argc, const char * argv[]) {
     bool done = false;
     bool validTest = false;
+
     string ciphertext;
     string test_num;
     
+    // Variables for Test One
     vector<string> candidates;
-    vector<int> parsedCiphertext;
     vector<DigramFreqMatrix*> frequencyMatrices;
     vector<vector<int>> freqCharTables;
+
+    // Variables for Test Two
+    string dictionaryWords;
+    vector<int> freqCharTable;
+    
+    // Variables for Ciphertext
+    vector<int> parsedCiphertext;
     vector<int> freqSymbolTable;
 
     while (!done) {
@@ -140,6 +168,11 @@ int main(int argc, const char * argv[]) {
         } else if (test_num == "2") {
             validTest = true;
             cout << "Preparing dictionary words.\n";
+            dictionaryWords = readTestTwoFile();
+
+            DigramFreqMatrix testTwoMatrix(27, 27, 0);
+            testTwoMatrix.setFrequencyValues(dictionaryWords);
+            freqCharTable = getLetterFrequency(dictionaryWords, 27);
         } else {
             validTest = false;
             cout << "That is an invalid test number. Please try again.\n";

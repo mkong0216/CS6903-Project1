@@ -29,6 +29,7 @@
 		C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1_candidate_5_plaintexts.txt; sourceTree = "<group>"; };
 		C16091242168F47D00EF85E1 /* DigramFreqMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigramFreqMatrix.cpp; sourceTree = "<group>"; };
 		C16091252168F47D00EF85E1 /* DigramFreqMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DigramFreqMatrix.hpp; sourceTree = "<group>"; };
+		C16091272169663000EF85E1 /* test2_candidate_70_english_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2_candidate_70_english_words.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 			children = (
 				C11F277F216832EF000E3EB9 /* main.cpp */,
 				C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */,
+				C16091272169663000EF85E1 /* test2_candidate_70_english_words.txt */,
 				C16091242168F47D00EF85E1 /* DigramFreqMatrix.cpp */,
 				C16091252168F47D00EF85E1 /* DigramFreqMatrix.hpp */,
 			);
