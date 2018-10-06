@@ -42,6 +42,7 @@ int main(int argc, const char * argv[]) {
     string test_num;
     
     vector<string> candidates;
+    vector<DigramFreqMatrix> frequencyMatrices;
 
     while (!done) {
         cout << "Enter the ciphertext:\n";
@@ -54,10 +55,9 @@ int main(int argc, const char * argv[]) {
             if (candidates.size() == 0) {
                 cout << "Preparing candidate plaintexts.\n";
                 candidates = readTestOneFile();
-                vector<DigramFreqMatrix> frequencyMatrices;
-                // Creating a 26 x 26 matrix to represent A-Z letters with initial values zero for each candidate
 
                 for (size_t i = 0; i < candidates.size(); i++) {
+                    // Matrix initialized to be a 27x27 since there are 26 letters and plus the space character.
                     DigramFreqMatrix plainTextMatrix = DigramFreqMatrix(27, 27, 0);
                     plainTextMatrix.setFrequencyValues(candidates[0]);
                     // Saving each digram frequency matrix for each candidate plaintext in vector frequencyMatrices
