@@ -36,20 +36,6 @@ vector<string> readTestOneFile () {
     return candidates;
 }
 
-// Creating digram frequency matrices for each of the candidate plaintexts
-vector<DigramFreqMatrix> createDigramFreqMatrix (vector<string> text) {
-    vector<DigramFreqMatrix> plainTextMatrices;
-    
-    char prevCharacter;
-
-    for (size_t i = 0; i < text.size(); i++) {
-        string plaintext = text[i];
-        
-    }
-    
-    return plainTextMatrices;
-}
-
 int main(int argc, const char * argv[]) {
     bool done = false;
     string ciphertext;
@@ -64,10 +50,22 @@ int main(int argc, const char * argv[]) {
         getline(cin, test_num);
         
         if (test_num == "1") {
-            cout << "Preparing candidate plaintexts.\n";
-            candidates = readTestOneFile();
-            // Creating a 26 x 26 matrix to represent A-Z letters with initial values zero
-            DigramFreqMatrix plainTextMatrix = DigramFreqMatrix(26, 26, 0);
+            // If candidate plaintexts haven't been read from file yet.
+            if (candidates.size() == 0) {
+                cout << "Preparing candidate plaintexts.\n";
+                candidates = readTestOneFile();
+                vector<DigramFreqMatrix> frequencyMatrices;
+                // Creating a 26 x 26 matrix to represent A-Z letters with initial values zero for each candidate
+
+                for (size_t i = 0; i < candidates.size(); i++) {
+                    DigramFreqMatrix plainTextMatrix = DigramFreqMatrix(27, 27, 0);
+                    plainTextMatrix.setFrequencyValues(candidates[0]);
+                    // Saving each digram frequency matrix for each candidate plaintext in vector frequencyMatrices
+                    // DigramFreqMatrix in index 0 corresponds to candidate plaintext 1, and so on.
+                    frequencyMatrices.push_back(plainTextMatrix);
+                }
+            }
+            
             done = true;
         } else if (test_num == "2") {
             cout << "Preparing dictionary words.\n";

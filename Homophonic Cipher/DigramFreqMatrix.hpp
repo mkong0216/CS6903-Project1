@@ -23,7 +23,7 @@ private:
 public:
     DigramFreqMatrix(unsigned, unsigned, double);
     
-    void setValue(const unsigned &, const unsigned &, int value);
+    void setFrequencyValues(std::string& text);
     int& operator()(const unsigned &, const unsigned &);
     void print() const;
 };

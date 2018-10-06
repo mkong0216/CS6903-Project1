@@ -23,8 +23,20 @@ DigramFreqMatrix::DigramFreqMatrix(unsigned rowSize, unsigned colSize, double in
     }
 }
 
-void DigramFreqMatrix::setValue(const unsigned &rowNo, const unsigned & colNo, const int value) {
-    this->matrix[rowNo][colNo] = value;
+void DigramFreqMatrix::setFrequencyValues(std::string &text) {
+    int prevChar;
+    int currChar;
+    for (size_t i = 1; i < text.length(); i++) {
+        prevChar = (int)text[i-1];
+        currChar = (int)text[i];
+        
+        // If the prevChar or currChar is a space, set index to 26,
+        // Otherwise set it to a value between 0 and 25 (where a = 0, b = 1, etc.)
+        prevChar = (prevChar == 32) ? 26 : (prevChar - 97);
+        currChar = (currChar == 32) ? 26 : (currChar - 97);
+
+        matrix[prevChar][currChar] += 1;
+    }
 }
 
 // Returns value of given location when asked in the form A(x,y)
