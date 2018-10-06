@@ -36,6 +36,32 @@ vector<string> readTestOneFile () {
     return candidates;
 }
 
+// Finding the letter frequency for the given plaintext
+vector<int> getLetterFrequency (const string& text, int num_symbols) {
+    vector<int> freqTable(num_symbols);
+    for (size_t i = 0; i < text.length(); i++) {
+        int index = (int)text[i];
+        // If character is a space, set it to 27. Otherwise, set it to value between 0 and 25;
+        index = (index == 32) ? 26 : index - 97;
+        freqTable[index] += 1;
+    }
+    
+    return freqTable;
+}
+
+// Finding the symbol frequency for the given ciphertext
+vector<int> getSymbolFrequency(const vector<int>& ciphertext, int num_symbols) {
+    vector<int> freqTable(num_symbols);
+    for (size_t i = 0; i < ciphertext.size(); i++) {
+        int index = ciphertext[i];
+        freqTable[index] += 1;
+    }
+    
+    return freqTable;
+}
+
+// Ciphertext is made up of comma separated numbers between 0 and 105.
+// This function parses ciphertext into a vector containing the numbers found in the ciphertext.
 vector<int> parseCiphertext(string str){
     vector<int> ciphertext;
     int cipherSymbol;
@@ -67,6 +93,8 @@ int main(int argc, const char * argv[]) {
     vector<string> candidates;
     vector<int> parsedCiphertext;
     vector<DigramFreqMatrix*> frequencyMatrices;
+    vector<vector<int>> freqCharTables;
+    vector<int> freqSymbolTable;
 
     while (!done) {
         cout << "Which test is being run? Enter 1 for test 1, 2 for test 2, or 0 for no more tests. \n";
@@ -81,7 +109,13 @@ int main(int argc, const char * argv[]) {
             if (candidates.size() == 0) {
                 cout << "Preparing candidate plaintexts.\n";
                 candidates = readTestOneFile();
-
+                
+                // Constructing individual character frequencies for plaintexts
+                for (size_t i = 0; i < candidates.size(); i++) {
+                    vector<int> freqTable = getLetterFrequency(candidates[0], 27);
+                    freqCharTables.push_back(freqTable);
+                }
+                
                 // Constructing digram frequency matrices for each plaintext and adding each to frequencyMatrices vector.
                 DigramFreqMatrix matrix1(27,27,0);
                 matrix1.setFrequencyValues(candidates[0]);
@@ -119,6 +153,9 @@ int main(int argc, const char * argv[]) {
             // Constructing digram frequency matrix for ciphertext
             DigramFreqMatrix cipherMatrix(106,106,0);
             cipherMatrix.setFrequencyValues(parsedCiphertext);
+            
+            // Construction individual symbol frequencies for ciphertext
+            freqSymbolTable = getSymbolFrequency(parsedCiphertext, 106);
         }
     }
     return 0;
