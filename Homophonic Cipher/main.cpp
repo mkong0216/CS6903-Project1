@@ -9,13 +9,38 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
+
+vector<string> readTestOneFile () {
+    ifstream file;
+    file.open("test1_candidate_5_plaintexts.txt");
+    
+    vector<string> candidates;
+    string line;
+    
+    if (!file) {
+        cerr << "Unable to open file\n";
+        exit(1);
+    }
+    
+    while (getline(file, line)) {
+        if (line.find("Candidate plaintext") == string::npos && line.length() != 1) {
+            candidates.push_back(line);
+        }
+    }
+
+    file.close();
+    return candidates;
+}
 
 int main(int argc, const char * argv[]) {
     bool done = false;
     string ciphertext;
     string test_num;
     
+    vector<string> candidates;
+
     while (!done) {
         cout << "Enter the ciphertext:\n";
         getline(cin, ciphertext);
@@ -24,10 +49,9 @@ int main(int argc, const char * argv[]) {
         
         if (test_num == "1") {
             cout << "Preparing candidate plaintexts.\n";
-            done = true;
+            candidates = readTestOneFile();
         } else if (test_num == "2") {
             cout << "Preparing dictionary words.\n";
-            done = true;
         } else {
             cout << "That is an invalid test number. Please try again.\n";
             done = false;

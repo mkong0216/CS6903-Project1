@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		C11F277C216832EF000E3EB9 /* Homophonic Cipher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Homophonic Cipher"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11F277F216832EF000E3EB9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1_candidate_5_plaintexts.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				C11F277F216832EF000E3EB9 /* main.cpp */,
+				C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */,
 			);
 			path = "Homophonic Cipher";
 			sourceTree = "<group>";
@@ -237,6 +239,7 @@
 				C11F2785216832EF000E3EB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
