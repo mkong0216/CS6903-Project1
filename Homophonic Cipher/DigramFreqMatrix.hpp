@@ -23,8 +23,9 @@ private:
 public:
     DigramFreqMatrix(unsigned, unsigned, double);
     
-    void setFrequencyValues(std::string& text);
-    int& operator()(const unsigned &, const unsigned &);
+    void setFrequencyValues(const std::string& text);
+    void setFrequencyValues(const vector<int> ciphertext);
+    vector<vector<int>> getMatrix();
     void print() const;
 };
 

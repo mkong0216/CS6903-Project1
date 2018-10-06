@@ -23,12 +23,15 @@ DigramFreqMatrix::DigramFreqMatrix(unsigned rowSize, unsigned colSize, double in
     }
 }
 
-void DigramFreqMatrix::setFrequencyValues(std::string &text) {
+void DigramFreqMatrix::setFrequencyValues(const std::string& text) {
+    // Setting frequency values for plaintext
     int prevChar;
     int currChar;
     for (size_t i = 1; i < text.length(); i++) {
         prevChar = (int)text[i-1];
         currChar = (int)text[i];
+        
+        if (currChar == 13) continue;
         
         // If the prevChar or currChar is a space, set index to 26,
         // Otherwise set it to a value between 0 and 25 (where a = 0, b = 1, etc.)
@@ -39,9 +42,18 @@ void DigramFreqMatrix::setFrequencyValues(std::string &text) {
     }
 }
 
-// Returns value of given location when asked in the form A(x,y)
-int& DigramFreqMatrix::operator()(const unsigned &rowNo, const unsigned & colNo) {
-    return this->matrix[rowNo][colNo];
+void DigramFreqMatrix::setFrequencyValues(const vector<int> ciphertext) {
+    int prevSymbol, currSymbol;
+    for (size_t i = 1; i < ciphertext.size(); i++) {
+        prevSymbol = ciphertext[i-1];
+        currSymbol = ciphertext[i];
+        
+        matrix[prevSymbol][currSymbol] += 1;
+    }
+}
+
+vector<vector<int>> DigramFreqMatrix::getMatrix() {
+    return this->matrix;
 }
 
 // Prints the matrix
