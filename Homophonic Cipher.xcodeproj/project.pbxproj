@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C11F2780216832EF000E3EB9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C11F277F216832EF000E3EB9 /* main.cpp */; };
+		C16091262168F47D00EF85E1 /* DigramFreqMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16091242168F47D00EF85E1 /* DigramFreqMatrix.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,8 @@
 		C11F277C216832EF000E3EB9 /* Homophonic Cipher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Homophonic Cipher"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11F277F216832EF000E3EB9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1_candidate_5_plaintexts.txt; sourceTree = "<group>"; };
+		C16091242168F47D00EF85E1 /* DigramFreqMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigramFreqMatrix.cpp; sourceTree = "<group>"; };
+		C16091252168F47D00EF85E1 /* DigramFreqMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DigramFreqMatrix.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			children = (
 				C11F277F216832EF000E3EB9 /* main.cpp */,
 				C16091232168416400EF85E1 /* test1_candidate_5_plaintexts.txt */,
+				C16091242168F47D00EF85E1 /* DigramFreqMatrix.cpp */,
+				C16091252168F47D00EF85E1 /* DigramFreqMatrix.hpp */,
 			);
 			path = "Homophonic Cipher";
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C16091262168F47D00EF85E1 /* DigramFreqMatrix.cpp in Sources */,
 				C11F2780216832EF000E3EB9 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

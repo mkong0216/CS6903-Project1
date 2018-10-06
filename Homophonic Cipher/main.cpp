@@ -10,8 +10,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "DigramFreqMatrix.hpp"
 using namespace std;
 
+// Reading text file for Test One and inserting each plaintext into vector
 vector<string> readTestOneFile () {
     ifstream file;
     file.open("test1_candidate_5_plaintexts.txt");
@@ -34,6 +36,20 @@ vector<string> readTestOneFile () {
     return candidates;
 }
 
+// Creating digram frequency matrices for each of the candidate plaintexts
+vector<DigramFreqMatrix> createDigramFreqMatrix (vector<string> text) {
+    vector<DigramFreqMatrix> plainTextMatrices;
+    
+    char prevCharacter;
+
+    for (size_t i = 0; i < text.size(); i++) {
+        string plaintext = text[i];
+        
+    }
+    
+    return plainTextMatrices;
+}
+
 int main(int argc, const char * argv[]) {
     bool done = false;
     string ciphertext;
@@ -50,8 +66,12 @@ int main(int argc, const char * argv[]) {
         if (test_num == "1") {
             cout << "Preparing candidate plaintexts.\n";
             candidates = readTestOneFile();
+            // Creating a 26 x 26 matrix to represent A-Z letters with initial values zero
+            DigramFreqMatrix plainTextMatrix = DigramFreqMatrix(26, 26, 0);
+            done = true;
         } else if (test_num == "2") {
             cout << "Preparing dictionary words.\n";
+            done = true;
         } else {
             cout << "That is an invalid test number. Please try again.\n";
             done = false;
