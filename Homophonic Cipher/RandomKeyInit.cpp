@@ -11,7 +11,7 @@
 #include <vector>
 using namespace std;
 
-int GetPutativeKey(int ciphertextFreq[106]){
+int GetPutativeKey(vector<int> ciphertextFreq){
   int putativeKey[106]={0};
   vector<float> ciphertextFreqPerc={0};
   float plaintextFreqPerc[27]={0};
@@ -70,17 +70,17 @@ int GetPutativeKey(int ciphertextFreq[106]){
 
   //sum ciphertextFreq and change to percentages
   sum=0;
-  for(i=0,i<ciphertextFreq.length(),i++){
+  for(i=0,i<ciphertextFreq.size(),i++){
     sum = sum + ciphertextFreq[i];
   }
-  for (i=0,i<ciphertextFreq.length(),i++){
+  for (i=0,i<ciphertextFreq.size(),i++){
     ciphertextFreqPerc[i] = ciphertextFreq[i] / sum;
   }
 
   //Prepare ciphtertext frequeny vector
   //<int cipher number, float cipher number freq perc
   vector<pair<int, float>> cipher_freq_search;
-  for(i=0,i<ciphertextFreq.length(),i++){
+  for(i=0,i<ciphertextFreq.size(),i++){
     cipher_freq_search.push_back(make_pair(ciphertextFreq[i],ciphertextFreqPerc[i]));
   }
 
@@ -107,10 +107,6 @@ int GetPutativeKey(int ciphertextFreq[106]){
       tempBest=10000;
       tempBestPos=0;
     }
-
-
-    //map_char_to_num_by_freq(&cipher_freq_search, l, j, k, &tempBest, int (&putativekey)[106]);
-    //tempBest=10000;
   }
 
   //print putativeKey[]
@@ -121,27 +117,6 @@ int GetPutativeKey(int ciphertextFreq[106]){
   return putativeKey;
 }
 
-/*
-//will try and make this with just a for loop
-//Recursive function to map character to number by frequency
-map_char_to_num_by_freq(vector<pair<int, float>> &cipher_freq_search, int l, float j, char k, int &tempBest, int (&putativekey)[106]){
-  //base case
-  if (l == 0){
-    return;
-  }
-  //recurse
-  map_char_to_num_by_freq(&cipher_freq_search, l-1, j, k, &tempBest, int (&putativekey)[106]);
-
-  //perform opations after returning from recusion depth
-  //find percentage in cipher_freq_search closest to J
-  tempBest=10000;
-  if (cip)
-}
-*/
-
-// Driver function to sort the vector elements
-// by third element of tuple
-// obtained from:https://www.geeksforgeeks.org/sorting-vector-tuple-c-ascending-order/
 bool sortbyth(const tuple<int, char, float>& a, const tuple<int, char, float>& b) {
   return (get<2>(a) > get<2>(b));
 }
