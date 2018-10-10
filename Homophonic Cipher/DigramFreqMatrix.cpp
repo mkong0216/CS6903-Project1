@@ -68,3 +68,14 @@ void DigramFreqMatrix::print() const
     }
 }
 
+
+int DigramFreqMatrix::computeMatrixScore(int** matrix_decrypt) {
+    int score = 0;
+    for(int i = 0; i < 27; i++){
+        for(int j = 0; j < 27; j++){
+            score += abs(matrix_decrypt[i][j] - matrix[i][j]);
+        }
+    }
+
+    return score;
+}

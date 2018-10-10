@@ -10,7 +10,7 @@
 #include <iterator>
 #include <vector>
 
-#include "e_hardcoded_values.h"
+
 using namespace std;
 
 vector<int> getSymbolFrequency(const vector<int>& ciphertext, int num_symbols);
@@ -23,10 +23,12 @@ string readTestTwoFile ();
 
 vector<int> parseCiphertext(string str);
 
+void display_decrypt_text(const vector<int>& cipher_text, int* final_key);
+
 class Encryption{
     int* Table[27];
-    int putative_key[106];
     vector<int> cipher;
+
 
     int schedule_func(int version, int j, int L){
         switch(version){
@@ -66,15 +68,6 @@ class Encryption{
         }
     }
 
-    void setPermutation(){
-        for(int i = 0 ; i < 106 ; ++i) putative_key[i] = i;
-        int T = 5000;
-        for(int i = 0 ; i < T ; ++i){
-            int R = rand();
-            int X = R % 106, Y = (R / 106) % 106;
-            if(X != Y) swap(putative_key[X],putative_key[Y]);
-        }
-    }
 
     void map_letter_key(){
         int S = 0;
@@ -85,6 +78,9 @@ class Encryption{
     }
 
 public:
+    int putative_key[106];
+    char char_freq_char[27] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v', 'w', 'x', 'y', 'z'};
+    int char_freq_freq[27] = {19, 7, 1, 2, 4, 10, 2, 2, 5, 6, 1, 1, 3, 2, 6, 6, 2, 1, 5, 5, 7, 2, 1, 2, 1, 2, 1};
 
     vector<int> Encrypt(string Msg, int version){
         int power = Msg.length();
@@ -121,6 +117,35 @@ public:
         copy(this->cipher.begin(), this->cipher.end(), output_iterator);
         cout << "Done Outputting Cipher.\n";
         cipher_file.close();
+    }
+
+    void setPermutation(){
+        int count = 0;
+        int char_index = 0;
+        for(int i = 0 ; i < 106 ; ++i) {
+            if(count == char_freq_freq[char_index]){
+                count =0;
+                char_index++;
+            }
+            putative_key[i] = char_index;
+            count++;
+        }
+        int T = 5000;
+        for(int i = 0 ; i < T ; ++i){
+            int R = rand();
+            int X = R % 106, Y = (R / 106) % 106;
+            if(X != Y) swap(putative_key[X],putative_key[Y]);
+        }
+    }
+
+    void display_final_key(){
+        for(int i = 0; i < 106; i++){
+            if(putative_key[i] == 0){
+                cout << i << "-  -" << endl;
+            }else{
+                cout << i << " " << char(putative_key[i]+96) << endl;
+            }
+        }
     }
 };
 

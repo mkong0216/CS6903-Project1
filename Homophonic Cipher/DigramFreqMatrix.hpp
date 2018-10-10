@@ -27,6 +27,8 @@ public:
     void setFrequencyValues(const vector<int> ciphertext);
     vector<vector<int>> getMatrix();
     void print() const;
+
+    int computeMatrixScore(int** matrix_decrypt);
 };
 
 #endif /* DigramFreqMatrix_hpp */
