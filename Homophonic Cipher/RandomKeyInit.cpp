@@ -24,15 +24,18 @@ bool sortbyth(const tuple<int, char, float>& a, const tuple<int, char, float>& b
 //the putative key out is the output value
 //the value inside the key should be 0-26
 //0 stands for space, 1-26 stands for a-z
-void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq){
+void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyOut){
   int putativeKey[106]={0};
-  vector<float> ciphertextFreqPerc={0};
+  float ciphertextFreqPerc[106]={0};
   float plaintextFreqPerc[27]={0};
   int sum=0;
   int i=0;
   float tempBest=10000;
   int tempBestPos=0;
   float tempPerc=0;
+  float j=0;
+  int tempBestVectorPos=0;
+
 
   // hardcoded vecor of frequeny values given to us
   //tuple<char_letter, char_count, char_perc
@@ -69,7 +72,7 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq){
   cout << "printing given table frequency by letter: " << "\n";
   for(i=0;i<plaintextFreq.size();i++){
     tempPerc = get<1>(plaintextFreq[i]);
-    tempPerc /= 106;
+    tempPerc /= 500;
     get<2>(plaintextFreq[i]) = tempPerc;
     cout << get<0>(plaintextFreq[i]) << " "
       << get<1>(plaintextFreq[i]) << " "
@@ -86,51 +89,53 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq){
       << get<2>(plaintextFreq[i]) << endl;
 }
 
+
+
   //sum ciphertextFreq and change to percentages
   sum=0;
   for(i=0;i<ciphertextFreq.size();i++){
     sum = sum + ciphertextFreq[i];
   }
   for (i=0;i<ciphertextFreq.size();i++){
-    ciphertextFreqPerc[i] = ciphertextFreq[i] / sum;
+    tempPerc = ciphertextFreq[i];
+    tempPerc /= sum;
+    ciphertextFreqPerc[i] = tempPerc;
   }
 
-  //Prepare ciphtertext frequeny vector
+
+
+  //Prepare ciphtertext frequency vector
   //<int cipher number, float cipher number freq perc
   vector<pair<int, float>> cipher_freq_search;
   for(i=0;i<ciphertextFreq.size();i++){
-    cipher_freq_search.push_back(make_pair(ciphertextFreq[i],ciphertextFreqPerc[i]));
+    cipher_freq_search.push_back(make_pair(i,ciphertextFreqPerc[i]));
   }
 
   //generate key
   for(i=0;i<plaintextFreq.size();i++){
-    float j = get<2>(plaintextFreq[i]) / get<1>(plaintextFreq[i]);
+    j = get<2>(plaintextFreq[i]);
     int k = get<0>(plaintextFreq[i]);
     for(int l=0;l<get<1>(plaintextFreq[i]);l++){
-
       //find the closest value to J in cipher text frequencies
       for(int m=0;m<cipher_freq_search.size();m++){
-        if(abs(j-get<1>(cipher_freq_search[m])<tempBest)){
-          tempBest=abs(j-get<1>(cipher_freq_search[m]));
-          tempBestPos=get<0>(cipher_freq_search[m]);
-        }
 
-      //put value closest to J in the putativeKey array, remove vector position
-      putativeKey[tempBestPos]=k;
-      cout << "putativekey at position: " << tempBestPos << "char value at pos: " << k << endl;
-      cipher_freq_search.erase(cipher_freq_search.begin()+tempBestPos);
+        if(abs(j-cipher_freq_search[m].second<tempBest)){
+          tempBest=abs(j-cipher_freq_search[m].second);
+          tempBestPos=cipher_freq_search[m].first;
+          tempBestVectorPos=m;
+	        }
       }
+      //put value closest to J in the putativeKey array, remove vector position
+      putativeKeyOut[tempBestPos]=k;
+
+      //cout << "putkeypos: " << putativeKeyOut << endl;
+      cipher_freq_search.erase(cipher_freq_search.begin()+tempBestVectorPos);
 
       //reset tempBest
       tempBest=10000;
       tempBestPos=0;
+      tempBestVectorPos=0;
     }
-  }
-
-  //print putativeKey[]
-  cout << "The putative key is: " << endl;
-  for (i=0;i<106;i++){
-    cout << i << " " << putativeKey[i] << endl;
   }
   return;
 }
