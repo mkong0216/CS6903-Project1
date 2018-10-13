@@ -10,13 +10,16 @@
 
 int main(void){
     string cipher_str;
+    string ciphertext_file;
     Encryption enc;
     Encryption enc_test;
     enc_test.setKeyPermutation();
     enc.setPermutation();
 
     cout << "Enter the ciphertext:\n";
-    getline(cin, cipher_str);
+    getline(cin, ciphertext_file);
+    ifstream cipher_file(ciphertext_file);
+    getline(cipher_file, cipher_str);
     vector<int> cipher_parsed = parseCiphertext(cipher_str);
 
     DigramFreqMatrix plain_matrix_1(27, 27, 0);
