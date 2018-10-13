@@ -24,7 +24,7 @@ bool sortbyth(const tuple<int, char, float>& a, const tuple<int, char, float>& b
 //the putative key out is the output value
 //the value inside the key should be 0-26
 //0 stands for space, 1-26 stands for a-z
-void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyOut){
+void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq){
   int putativeKey[106]={0};
   vector<float> ciphertextFreqPerc={0};
   float plaintextFreqPerc[27]={0};
@@ -116,7 +116,7 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyO
         }
 
       //put value closest to J in the putativeKey array, remove vector position
-      putativeKeyOut[tempBestPos]=k;
+      putativeKey[tempBestPos]=k;
       cout << "putativekey at position: " << tempBestPos << "char value at pos: " << k << endl;
       cipher_freq_search.erase(cipher_freq_search.begin()+tempBestPos);
       }
@@ -130,7 +130,7 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyO
   //print putativeKey[]
   cout << "The putative key is: " << endl;
   for (i=0;i<106;i++){
-    cout << i << " " << putativeKeyOut[i] << endl;
+    cout << i << " " << putativeKey[i] << endl;
   }
   return;
 }
