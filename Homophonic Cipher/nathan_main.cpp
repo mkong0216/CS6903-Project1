@@ -17,14 +17,7 @@ int main(void){
     vector<int> cipher_freq = getSymbolFrequency(cipher, 106);
 
     RandomKeyInit key_gen;
-    int* putative_key_out = new int[106];
-    key_gen.GetPutativeKey(cipher, putative_key_out);
 
-    for(int i = 0; i < 106; i++){
-        if(putative_key_out[i] == 0){
-            cout << i << " space" << endl;
-        }else{
-            cout << i << " " << char(putative_key_out[i]+96) << endl;
-        }
-    }
+    key_gen.GetPutativeKey(cipher);
+
 }
