@@ -23,6 +23,8 @@ string readTestTwoFile ();
 
 vector<int> parseCiphertext(string str);
 
+vector<string> getInputs();
+
 void display_decrypt_text(const vector<int>& cipher_text, int* final_key);
 
 class Encryption{
@@ -72,8 +74,8 @@ class Encryption{
     void map_letter_key(){
         int S = 0;
         for(int i = 0; i < 27; i++){
-            Table[i] = &putative_key[S];
-            S += char_freq_freq[i];
+            Table[i] = &this->putative_key[S];
+            S += this->char_freq_freq[i];
         }
     }
 
@@ -87,18 +89,19 @@ public:
         int putative_key[106];
 
         for(int i = 0; i < 106; i++){
-            putative_key[i] = i;
+            this->putative_key[i] = i;
         }
 
-        setPermutation();
-        map_letter_key();
+        this->setPermutation();
+        this->map_letter_key();
 
         for(int i = 0; i < power; i++){
             char plain = Msg[i] == ' ' ? 0 : Msg[i] - 'a' + 1;
             int mod_num = schedule_func(version, i, power);
             mod_num = (mod_num % char_freq_freq[plain] + char_freq_freq[plain]) % char_freq_freq[plain];
 
-            int cipher_tmp = Table[plain][mod_num];
+            int cipher_tmp = -1;
+            cipher_tmp = Table[int(plain)][mod_num];
             this->cipher.push_back(cipher_tmp);
         }
         cout << "Done Encryption.\n";
@@ -122,19 +125,31 @@ public:
     void setPermutation(){
         int count = 0;
         int char_index = 0;
-        for(int i = 0 ; i < 106 ; ++i) {
-            if(count == char_freq_freq[char_index]){
-                count =0;
-                char_index++;
-            }
-            putative_key[i] = char_index;
-            count++;
-        }
         int T = 5000;
         for(int i = 0 ; i < T ; ++i){
             int R = rand();
             int X = R % 106, Y = (R / 106) % 106;
-            if(X != Y) swap(putative_key[X],putative_key[Y]);
+            if(X != Y) swap(this->putative_key[X],this->putative_key[Y]);
+        }
+    }
+
+    void setKeyPermutation(){
+        int count = 0;
+        int char_index = 0;
+        int T = 5000;
+        for(int i = 0; i < 106; ++i){
+            if(count == char_freq_freq[char_index]){
+                count = 0;
+                char_index++;
+            }
+            this->putative_key[i] = char_index;
+            count++;
+        }
+
+        for(int i = 0 ; i < T ; ++i){
+            int R = rand();
+            int X = R % 106, Y = (R / 106) % 106;
+            if(X != Y) swap(this->putative_key[X],this->putative_key[Y]);
         }
     }
 
