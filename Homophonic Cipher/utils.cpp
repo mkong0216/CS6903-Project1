@@ -3,6 +3,8 @@
 //
 
 #include "utils.hpp"
+#include <vector>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -88,6 +90,14 @@ vector<int> parseCiphertext(string cipher_msg){
             ciphertext.push_back(stoi(tmp));
             tmp = "";
         }
+
+//vector<int> parseCiphertext(const string& s) {
+//    vector<int> cipherSymbols;
+//    char delimiter = ',';
+//    string symbol;
+//    std::istringstream tokenStream(s);
+//    while (getline(tokenStream, symbol, delimiter)) {
+//        cipherSymbols.push_back(stoi(symbol));
     }
     return ciphertext;
 }
@@ -100,6 +110,5 @@ vector<string> getInputs(){
             "mammate punners octette asylum nonclinically trotters slant collocation cardiology enchants ledge deregulated bottommost capsulate biotechnologies subtended cloddiest training joneses catafalque fieldmice hostels affect shrimper differentiations metacarpus amebas sweeter shiatsu oncoming tubeless menu professing apostatizing moreover eumorphic casked euphemistically programmability campaniles chickpea inactivates crossing defoggers reassures tableland doze reassembled striate precocious noncomba"
     };
 }
-
 
 

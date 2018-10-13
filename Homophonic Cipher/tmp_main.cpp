@@ -5,7 +5,7 @@
 // Testing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 #include "HomophonicCipherMatrix.hpp"
 #include "RandomKeyInit.hpp"
-//#include "utils.hpp"
+#include "utils.hpp"
 
 void do_test_one();
 
@@ -34,8 +34,10 @@ int main(void){
 void do_test_one(void){
     Encryption enc_test;
     Encryption enc;
+
     enc.setPermutation();
     enc_test.setKeyPermutation();
+
     string cipher_str;
     string ciphertext_file;
     vector<int> freqSymbolTable;
@@ -77,6 +79,7 @@ void do_test_one(void){
 
     HomophonicCipherMatrix cipher_matrix;
     cipher_matrix.update_cipher_bigram_matrix(cipher_parsed);
+
 
     int final_score = 100000;
     int final_index = -1;
