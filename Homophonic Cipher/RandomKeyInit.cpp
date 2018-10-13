@@ -25,7 +25,7 @@ bool sortbyth(const tuple<int, char, float>& a, const tuple<int, char, float>& b
 //the value inside the key should be 0-26
 //0 stands for space, 1-26 stands for a-z
 void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyOut){
-  int putativeKey[105]={0};
+  int putativeKey[106]={0};
   vector<float> ciphertextFreqPerc={0};
   float plaintextFreqPerc[27]={0};
   int sum=0;
@@ -59,12 +59,11 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyO
   plaintextFreq.push_back(make_tuple(19, 5, 0));
   plaintextFreq.push_back(make_tuple(20, 7, 0));
   plaintextFreq.push_back(make_tuple(21, 2, 0));
-  plaintextFreq.push_back(make_tuple(22, 7, 0));
-  plaintextFreq.push_back(make_tuple(23, 1, 0));
-  plaintextFreq.push_back(make_tuple(24, 2, 0));
-  plaintextFreq.push_back(make_tuple(25, 1, 0));
-  plaintextFreq.push_back(make_tuple(26, 2, 0));
-  plaintextFreq.push_back(make_tuple(27, 1, 0));
+  plaintextFreq.push_back(make_tuple(22, 1, 0));
+  plaintextFreq.push_back(make_tuple(23, 2, 0));
+  plaintextFreq.push_back(make_tuple(24, 1, 0));
+  plaintextFreq.push_back(make_tuple(25, 2, 0));
+  plaintextFreq.push_back(make_tuple(26, 1, 0));
 
   //set percentages to plaintextFreq
   cout << "printing given table frequency by letter: " << "\n";
