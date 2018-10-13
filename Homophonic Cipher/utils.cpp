@@ -3,6 +3,8 @@
 //
 
 #include "utils.hpp"
+#include <vector>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -78,27 +80,15 @@ string readTestTwoFile () {
 
 // Ciphertext is made up of comma separated numbers between 0 and 105.
 // This function parses ciphertext into a vector containing the numbers found in the ciphertext.
-vector<int> parseCiphertext(string str){
-    vector<int> ciphertext;
-    int cipherSymbol;
-    while(str.size()){
-        int index = str.find(',');
-        if (index != string::npos){
-            cipherSymbol = stoi(str.substr(0, index));
-            ciphertext.push_back(cipherSymbol);
-            str = str.substr(index + 1);
-            if(str.size()==0) {
-                cipherSymbol = stoi(str);
-                ciphertext.push_back(cipherSymbol);
-            }
-        } else {
-            cipherSymbol = stoi(str);
-            ciphertext.push_back(cipherSymbol);
-            str = "";
-        }
+vector<int> parseCiphertext(const string& s) {
+    vector<int> cipherSymbols;
+    char delimiter = ',';
+    string symbol;
+    std::istringstream tokenStream(s);
+    while (getline(tokenStream, symbol, delimiter)) {
+        cipherSymbols.push_back(stoi(symbol));
     }
-    return ciphertext;
+    return cipherSymbols;
 }
-
 
 

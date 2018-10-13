@@ -4,8 +4,8 @@
 
 // Testing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 #include "HomophonicCipherMatrix.hpp"
-#include "RandomKeyInit.hpp"
-//#include "utils.hpp"
+//#include "RandomKeyInit.hpp"
+#include "utils.hpp"
 
 
 int main(void){
@@ -13,7 +13,7 @@ int main(void){
     string ciphertext_file;
     Encryption enc;
     Encryption enc_test;
-    enc_test.setKeyPermutation();
+    enc_test.setPermutation();
     enc.setPermutation();
 
     cout << "Enter the ciphertext:\n";
@@ -52,7 +52,7 @@ int main(void){
 
     int final_score_1 = 100000;
     for(int i = 0; i < 6000; i++){
-        enc_test.setKeyPermutation();
+        enc_test.setPermutation();
         int score = cipher_matrix.inner_climb_hill(plain_matrix_2, enc_test.putative_key);
         if(score < final_score_1){
             final_score_1 = score;

@@ -21,7 +21,7 @@ vector<string> readTestOneFile ();
 
 string readTestTwoFile ();
 
-vector<int> parseCiphertext(string str);
+vector<int> parseCiphertext(const string& str);
 
 void display_decrypt_text(const vector<int>& cipher_text, int* final_key);
 
