@@ -1,0 +1,9 @@
+###compilation:
+cmake .
+make
+
+###Running:
+./testing
+
+When user chooses which test to run, he should press ENTER twice after input 1, 2 or 0.
+The cipher text length for test 1 should represent 500 plain text characters.
