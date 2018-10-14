@@ -18,7 +18,6 @@ int main(void){
 
         cout << "Which test is being run? Enter 1 for test 1, 2 for test 2, or 0 for no more tests. \n";
         getline(cin, test_num);
-        cin.ignore();
 
         if(test_num == "1"){
             do_test_one();
@@ -97,19 +96,62 @@ void do_test_one(void){
         if(final_score > temp_final){
             final_score = temp_final;
             final_index = n;
-            cout << n << " index" << endl;
         }
     }
-    cout << endl << final_score << " " << final_index << endl;
+    if(final_index != -1){
+        cout << "The decrypted plain text is: \n" << getInputs()[final_index] << endl;
+    }else{cout << "Unable to find plain text.\n";}
+
 }
 
 
 void do_test_two(){
+    string dictionaryWords = "";
+    string cipher_str = "";
+    vector<int> freqSymbolTable;
+    RandomKeyInit keyGen;
+    Encryption enc_test;
+    Encryption enc;
+
+    enc.setPermutation();
+    enc_test.setKeyPermutation();
+
     cout << "Preparing dictionary words.\n";
     dictionaryWords = readTestTwoFile();
 
+    cout << "Enter the ciphertext:\n";
+    getline(cin, cipher_str);
+    vector<int> cipher_parsed = parseCiphertext(cipher_str);
+    freqSymbolTable = getSymbolFrequency(cipher_parsed, 106);
+    keyGen.GetPutativeKey(freqSymbolTable, enc_test.putative_key);
+
     DigramFreqMatrix testTwoMatrix(27, 27, 0);
     testTwoMatrix.setFrequencyValues(dictionaryWords);
+
+    HomophonicCipherMatrix cipher_matrix;
+    cipher_matrix.update_cipher_bigram_matrix(cipher_parsed);
+
+    int final_score=100000;
+    int* final_key = new int[106];
+
+    for(int i = 0; i < 1000; i++){
+        enc_test.setKeyPermutation();
+        int score = cipher_matrix.inner_climb_hill(testTwoMatrix, enc_test.putative_key);
+        if(score < final_score){
+            final_score = score;
+            for(int j = 0; j < 106; j++){
+                final_key[j] = enc_test.putative_key[j];
+            }
+        }
+    }
+
+    if(final_score == 100000){
+        cout << "Unable to find plain text\n";
+    }else{
+        cout << "Final Score: " << final_score << endl;
+        cipher_matrix.display_decrypt_text(cipher_parsed, final_key);
+    }
+    delete[] final_key;
 }
 
 

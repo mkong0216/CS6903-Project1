@@ -74,9 +74,9 @@ void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int putativeKeyOu
     tempPerc = get<1>(plaintextFreq[i]);
     tempPerc /= 500;
     get<2>(plaintextFreq[i]) = tempPerc;
-    cout << get<0>(plaintextFreq[i]) << " "
-      << get<1>(plaintextFreq[i]) << " "
-      << get<2>(plaintextFreq[i]) << endl;
+//    cout << get<0>(plaintextFreq[i]) << " "
+//      << get<1>(plaintextFreq[i]) << " "
+//      << get<2>(plaintextFreq[i]) << endl;
     }
 
   //sort plaintextFreq by percentage
