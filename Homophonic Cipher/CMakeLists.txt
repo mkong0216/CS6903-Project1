@@ -3,4 +3,4 @@ project(testing)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(testing tmp_main.cpp HomophonicCipherMatrix.cpp DigramFreqMatrix.cpp)
+add_executable(testing tmp_main.cpp HomophonicCipherMatrix.cpp DigramFreqMatrix.cpp utils.cpp RandomKeyInit.cpp)

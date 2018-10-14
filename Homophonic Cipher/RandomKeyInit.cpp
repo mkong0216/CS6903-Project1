@@ -24,7 +24,7 @@ bool sortbyth(const tuple<int, char, float>& a, const tuple<int, char, float>& b
 //the putative key out is the output value
 //the value inside the key should be 0-26
 //0 stands for space, 1-26 stands for a-z
-void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int* putativeKeyOut){
+void RandomKeyInit::GetPutativeKey(vector<int> ciphertextFreq, int putativeKeyOut[106]){
   int putativeKey[106]={0};
   float ciphertextFreqPerc[106]={0};
   float plaintextFreqPerc[27]={0};

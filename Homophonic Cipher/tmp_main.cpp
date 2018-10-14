@@ -8,6 +8,7 @@
 #include "utils.hpp"
 
 void do_test_one();
+void do_test_two();
 
 int main(void){
     bool done = false;
@@ -22,7 +23,7 @@ int main(void){
         if(test_num == "1"){
             do_test_one();
         }else if(test_num == "2"){
-
+            do_test_two();
         }else{
             done = true;
         }
@@ -48,7 +49,7 @@ void do_test_one(void){
     getline(cin, cipher_str);
     vector<int> cipher_parsed = parseCiphertext(cipher_str);
     freqSymbolTable = getSymbolFrequency(cipher_parsed, 106);
-
+    keyGen.GetPutativeKey(freqSymbolTable, enc_test.putative_key);
 
     DigramFreqMatrix plain_matrix_1(27, 27, 0);
     DigramFreqMatrix plain_matrix_2(27, 27, 0);
@@ -85,9 +86,9 @@ void do_test_one(void){
     int final_index = -1;
     for(int n = 0; n < plain_matrix_vec.size(); n++){
         int temp_final = 100000;
-        for(int i = 0; i < 6000; i++){
+        for(int i = 0; i < 1000; i++){
             enc_test.setKeyPermutation();
-            int score = cipher_matrix.inner_climb_hill(plain_matrix_vec[n], enc_test.putative_key);
+            int score = cipher_matrix.inner_climb_hill(plain_matrix_vec[1], enc_test.putative_key);
             if(score < temp_final){
                 temp_final = score;
                 cout << score << endl;
@@ -96,9 +97,19 @@ void do_test_one(void){
         if(final_score > temp_final){
             final_score = temp_final;
             final_index = n;
+            cout << n << " index" << endl;
         }
     }
     cout << endl << final_score << " " << final_index << endl;
+}
+
+
+void do_test_two(){
+    cout << "Preparing dictionary words.\n";
+    dictionaryWords = readTestTwoFile();
+
+    DigramFreqMatrix testTwoMatrix(27, 27, 0);
+    testTwoMatrix.setFrequencyValues(dictionaryWords);
 }
 
 

@@ -13,7 +13,7 @@ class RandomKeyInit {
 
 public:
 
-    void GetPutativeKey(std::vector<int>);
+    void GetPutativeKey(std::vector<int>, int putativeKeyOut[106]);
 
 private:
 //    bool sortbyth(const tuple<int, char, float>&, const tuple<int, char, float>&);
